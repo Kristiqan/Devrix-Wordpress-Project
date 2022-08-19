@@ -20,14 +20,22 @@ add_filter('the_content', 'my_filter');
 function my_filter($content){
   
     if(is_singular()){
-    _e( 'This is my filter', 'hello' );
+    esc_html_e( 'This is my filter', 'twentytwentychild' );
    }
 }
 
 function div_one($content){
   
     if(is_singular()){
-    echo '<div>One</div>';
+          printf(
+             wp_kses(
+           __( '<div>One</div>' ),
+            [
+                '<div>' => []
+            ]
+            ),
+        );
+        
    }
 }
 add_filter('the_content', 'div_one', 3);
@@ -39,7 +47,14 @@ add_filter('the_content', 'div_one', 3);
 function div_two($content){
   
     if(is_singular()){
-    echo '<div>Two</div>';
+        printf(
+            wp_kses(
+          __( '<div>Two</div>' ),
+           [
+               '<div>' => []
+           ]
+           ),
+       );
    }
 }
 add_filter('the_content', 'div_two', 2);
@@ -48,7 +63,14 @@ add_filter('the_content', 'div_two', 2);
 function div_three($content){
   
     if(is_singular()){
-    echo '<div>Three</div>';
+        printf(
+            wp_kses(
+          __( '<div>Three</div>' ),
+           [
+               '<div>' => []
+           ]
+           ),
+       );
    }
 }
 add_filter('the_content', 'div_three', 1);
@@ -64,6 +86,8 @@ function members_only($items, $args ){
      
 }
 add_filter('wp_nav_menu_items', 'members_only', 10, 2)
+
+
 
 
 

@@ -85,12 +85,20 @@ function members_only($items, $args ){
         
      
 }
-add_filter('wp_nav_menu_items', 'members_only', 10, 2)
+add_filter('wp_nav_menu_items', 'members_only', 10, 2);
 
 
+add_action( 'profile_update', 'send_email_to_admin', 10, 3 );
+function send_email_to_admin( $user_id, $old_data, $new_data ) {
 
-
-
-
+    
+        $to = 'kstefanov@devrix.com';
+        $headers = array( 'Content-Type: text/html; charset=UTF-8' );
+        $subject = 'A User Updated Their Profile Settings';
+        $body = 'This is not a RickRoll I Promise: https://www.youtube.com/watch?v=xm3YgoEiEDc';
+        
+        wp_mail( $to, $subject, $body, $headers );
+    
+}
 
 ?>

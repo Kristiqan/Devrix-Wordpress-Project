@@ -13,6 +13,7 @@
 get_header();
 ?>
 
+<main id="site-content">
 
     <?php
 
@@ -26,13 +27,13 @@ get_header();
             the_post_thumbnail();
             the_content();
             the_author();
-            
+          
         }
     }
 
     ?>
 
-
+</main>
 
 <?php get_template_part( 'template-parts/footer-menus-widgets' ); ?>
 

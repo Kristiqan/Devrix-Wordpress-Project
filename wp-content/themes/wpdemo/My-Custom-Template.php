@@ -26,6 +26,7 @@ get_header();
             the_title();
             the_post_thumbnail();
             the_content();
+            do_action( 'bill_action_something' );
             the_author();
           
         }

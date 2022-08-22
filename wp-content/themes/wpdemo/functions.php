@@ -16,13 +16,29 @@ function my_theme_enqueue_styles() {
 ?>
 
 <?php
+
+
+
 add_filter('the_content', 'my_filter');
 function my_filter($content){
   
     if(is_singular()){
-    esc_html_e( 'This is my filter', 'twentytwentychild' );
+        $content .= apply_filters( 'bill_change_text', __( 'This is my filter', 'twentytwentychild' ) );
+    
    }
+   return $content;
 }
+
+
+
+function my_new_filter($content){
+
+    $content = __( 'This is my extendable filter', 'twentytwentychild' );
+    
+    return $content;
+
+}
+add_filter('bill_change_text', 'my_new_filter');
 
 function div_one($content){
   
@@ -100,5 +116,11 @@ function send_email_to_admin( $user_id, $old_data, $new_data ) {
         wp_mail( $to, $subject, $body, $headers );
     
 }
+
+
+
+
+
+
 
 ?>

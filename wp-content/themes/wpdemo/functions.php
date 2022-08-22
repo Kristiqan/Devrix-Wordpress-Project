@@ -17,15 +17,7 @@ function my_theme_enqueue_styles() {
 
 <?php
 
-//function display_content() {
 
-    // ala bla
-
-    //$content = apply_filters( 'the_content' );
-
-    // ala bala + This is my filter
-
-//}
 
 add_filter('the_content', 'my_filter');
 function my_filter($content){
@@ -37,7 +29,7 @@ function my_filter($content){
    return $content;
 }
 
-// // ala bala + This is my filter + my second filter
+
 
 function my_new_filter($content){
 

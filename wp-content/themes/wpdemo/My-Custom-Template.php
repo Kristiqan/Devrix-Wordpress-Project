@@ -10,31 +10,32 @@
 */
 
 
-
-
-$args = array (
-  
-'post_type' => 'post',
-'post_status'=> 'publish',
-'posts_per_page' => 1
-
-);
-
-$loop= new WP_Query($args);
-
-if ( $loop -> have_posts() ) :
-    while ( $loop -> have_posts() ) : $loop -> the_post();
-      get_header();
-       the_title();
-       the_post_thumbnail();
-        the_content();
-        the_author();
-        get_footer();
-
-endwhile;
-    endif;
-   
-
+get_header();
 ?>
+
+
+    <?php
+
+    if ( have_posts() ) {
+
+        while ( have_posts() ) {
+            the_post();
+
+           
+            the_title();
+            the_post_thumbnail();
+            the_content();
+            the_author();
+            
+        }
+    }
+
+    ?>
+
+
+
+<?php get_template_part( 'template-parts/footer-menus-widgets' ); ?>
+
+<?php get_footer(); ?>
 
 <?php   wp_reset_postdata();  ?>

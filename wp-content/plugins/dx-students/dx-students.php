@@ -23,7 +23,7 @@ if ( ! function_exists('custom_post_type') ) {
             'singular_name'         => _x( 'Students', 'Post Type Singular Name', 'twentytwentychild' ),
             'menu_name'             => __( 'Students', 'twentytwentychild' ),
             'name_admin_bar'        => __( 'Post Type', 'twentytwentychild' ),
-            'archives'              => __( 'Item Archives', 'twentytwentychild' ),
+            'archives'              => __( 'Students', 'twentytwentychild' ),
             'attributes'            => __( 'Item Attributes', 'twentytwentychild' ),
             'parent_item_colon'     => __( 'Parent Item:', 'twentytwentychild' ),
             'all_items'             => __( 'All Items', 'twentytwentychild' ),
@@ -70,5 +70,4 @@ if ( ! function_exists('custom_post_type') ) {
     
     }
     add_action( 'init', 'custom_post_type', 0 );
-    
     }

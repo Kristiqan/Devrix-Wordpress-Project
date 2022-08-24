@@ -58,7 +58,7 @@ get_header();
 </div>
 </main>
 
-<?php the_posts_pagination( array( 'mid_size' => 6 ) ); ?>
+
 
 <?php get_template_part( 'template-parts/footer-menus-widgets' ); ?>
 

@@ -69,5 +69,5 @@ if ( ! function_exists('custom_post_type') ) {
         register_post_type( 'students', $args );
     
     }
-    add_action( 'init', 'custom_post_type', 0 );
+    add_action( 'init', 'custom_post_type' );
     }

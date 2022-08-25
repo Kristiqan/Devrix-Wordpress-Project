@@ -118,9 +118,137 @@ function send_email_to_admin( $user_id, $old_data, $new_data ) {
 }
 
 
+function dx_location_box() {
+    $screens = [ 'students' ];
+    foreach ( $screens as $screen ) {
+        add_meta_box(
+            'dxloc_box_id',                 
+            'Location',     
+            'dx_lo_box_html',  
+            $screen                    
+        );
+    }
+}
+add_action( 'add_meta_boxes', 'dx_location_box' );
 
 
-
-
-
+function dx_lo_box_html( $post ) {
 ?>
+<label for="dx_field">Lives in</label>
+<input type="text" id="dx_lo" name="dx_lo" value="<?php echo esc_attr(get_post_meta(get_the_ID(), 'dx_lo', true))?>">
+<?php
+}
+
+function dx_addr_custom_box() {
+    $screens = [ 'students' ];
+    foreach ( $screens as $screen ) {
+        add_meta_box(
+            'dxaddr_box_id',                 
+            'Full Address:',     
+            'dx_addr_box_html',  
+            $screen                    
+        );
+    }
+}
+add_action( 'add_meta_boxes', 'dx_addr_custom_box' );
+
+
+function dx_addr_box_html( $post ) {
+?>
+<label for="dx_field">Address</label>
+<input type="text" id="dx_address" name="dx_address" value="<?php echo esc_attr(get_post_meta(get_the_ID(), 'dx_address', true))?>">
+<?php
+}
+
+function dx_birth_custom_box() {
+    $screens = [ 'students' ];
+    foreach ( $screens as $screen ) {
+        add_meta_box(
+            'dxabi_box_id',                 
+            'Birth Date:',     
+            'dx_bi_box_html',  
+            $screen                    
+        );
+    }
+}
+add_action( 'add_meta_boxes', 'dx_birth_custom_box' );
+
+
+function dx_bi_box_html( $post ) {
+?>
+<label for="dx_field">Born</label>
+<input type="date" id="dx_bi" name="dx_bi" value="<?php echo esc_attr(get_post_meta(get_the_ID(), 'dx_bi', true))?>">
+<?php
+}
+
+function dx_cg_custom_box() {
+    $screens = [ 'students' ];
+    foreach ( $screens as $screen ) {
+        add_meta_box(
+            'dxcg_box_id',                 
+            'Class/Grade:',     
+            'dx_cg_box_html',  
+            $screen                    
+        );
+    }
+}
+add_action( 'add_meta_boxes', 'dx_cg_custom_box' );
+
+
+function dx_cg_box_html( $post ) {
+?>
+<label for="dx_field">Class And Grade</label>
+<input type="text" id="dx_cg" name="dx_cg" value="<?php echo esc_attr(get_post_meta(get_the_ID(), 'dx_cg', true))?>">
+<?php
+}
+
+
+function dx_acin_custom_box() {
+    $screens = [ 'students' ];
+    foreach ( $screens as $screen ) {
+        add_meta_box(
+            'dxacin_box_id',                 
+            'Active/inactive',     
+            'dx_acin_box_html',  
+            $screen                    
+        );
+    }
+}
+add_action( 'add_meta_boxes', 'dx_acin_custom_box' );
+
+
+function dx_acin_box_html( $post ) {
+?>
+<label for="dx_field">Is the student active or not</label>
+<input type="text" id="dx_axin" name="dx_acin" value="<?php echo esc_attr(get_post_meta(get_the_ID(), 'dx_acin', true))?>">
+<?php
+}
+
+function dx_dxcus_box_save($post_id){
+if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ){
+    return;
+}
+if( $parent_id = wp_is_post_revision($post_id)){
+    $post_id = $parent_id;
+}
+$field_list = [
+  'dx_lo',
+  'dx_address',
+  'dx_bi',
+  'dx_acin',
+  'dx_cg'
+];
+foreach ( $field_list as $fieldName){
+    if(array_key_exists($fieldName,$_POST)){
+        update_post_meta(
+        $post_id,
+        $fieldName,
+        sanitize_text_field( $_POST[ $fieldName ] )
+
+
+        );
+    }
+}
+ 
+}
+add_action( 'save_post', 'dx_dxcus_box_save' );
